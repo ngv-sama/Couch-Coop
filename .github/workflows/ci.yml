@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Cache Freedoom
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.couch-coop-ci/wads
           key: freedoom-0.13.0
