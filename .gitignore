@@ -1,0 +1,18 @@
+# Written by Claude Code each time it loads the mod from this folder.
+.claude-plugin/types/
+
+# Dependencies (only TypeScript, for type-checking)
+node_modules/
+
+# Engine build leftovers
+engines/**/build/
+*.o
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log

@@ -1,0 +1,16 @@
+name: Idea
+description: Suggest a game, an emulator, or a way to make playing (with Claude) better
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What would you like, and what would it let you do?
+    validations:
+      required: true
+  - type: textarea
+    id: licensing
+    attributes:
+      label: Licensing (for new games or emulators)
+      description: Couch Co-op only bundles code and games whose licenses allow it. Link the project and its license if you know them.

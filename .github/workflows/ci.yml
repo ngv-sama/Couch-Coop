@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  runner:
+    name: Runner (Node ${{ matrix.node }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Cache Freedoom
+        uses: actions/cache@v4
+        with:
+          path: ~/.couch-coop-ci/wads
+          key: freedoom-0.13.0
+      - name: Fetch Freedoom (checksum-checked) for the Doom test
+        run: node -e "import('./runner/lib/freedoom.mjs').then(m => m.ensureFreedoom(process.env.HOME + '/.couch-coop-ci/wads'))"
+      - name: Test
+        run: COUCH_COOP_TEST_WAD="$HOME/.couch-coop-ci/wads/freedoom1.wad" npm test
+
+  mod:
+    name: Mod (validate and test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Claude Code
+        # The version the mod API was written against; raise it deliberately.
+        run: npm install --global @anthropic-ai/claude-code@2.1.287
+      - name: Validate the plugin and the marketplace
+        run: |
+          claude plugin validate .claude-plugin/plugin.json --strict
+          claude plugin validate .claude-plugin/marketplace.json --strict
+      - name: Test the mod
+        run: claude plugin test .
+
+  engines:
+    name: Engines match their source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Zig 0.16.0
+        run: pip install ziglang==0.16.0
+      - name: Rebuild doom.wasm and gameboy.wasm
+        run: ZIG="python3 -m ziglang" ./scripts/build-engines.sh
+      - name: Compare with the committed engines
+        run: cd runner/cores && sha256sum -c CHECKSUMS.sha256

@@ -1,0 +1,48 @@
+name: Bug report
+description: Something in Couch Co-op does not work as it should
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for the report. Please do not attach ROMs or commercial game files.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Doom (Freedoom)
+        - Doom (my own WAD)
+        - Game Boy (bundled homebrew)
+        - Game Boy (my own ROM)
+        - The launcher or pane
+        - Claude playing
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: "`claude --version`, `node --version`, and the Couch Co-op version from /plugin"
+      placeholder: Claude Code 2.1.287, Node v22.11.0, Couch Co-op 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal and OS
+      placeholder: Ghostty 1.2 on macOS 15, fullscreen rendering on
+    validations:
+      required: true
+  - type: textarea
+    id: debug
+    attributes:
+      label: Debug log lines
+      description: Run `claude --debug`, reproduce, and paste the lines that start with `couch-coop` or `runner`.
+      render: text

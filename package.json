@@ -1,0 +1,30 @@
+{
+  "name": "couch-coop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An arcade inside Claude Code: Doom and Game Boy games in a pane, co-op with Claude.",
+  "license": "MIT AND GPL-2.0-or-later AND Zlib",
+  "author": "Nikhil Guru Venkatesh (original_ngv)",
+  "homepage": "https://github.com/ngv-sama/couch-coop",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngv-sama/couch-coop.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test runner/test/*.test.mjs",
+    "test:mod": "claude plugin test .",
+    "test:all": "npm test && npm run test:mod",
+    "validate": "claude plugin validate .claude-plugin/plugin.json --strict && claude plugin validate .claude-plugin/marketplace.json --strict",
+    "typecheck": "tsc -p .",
+    "build:engines": "./scripts/build-engines.sh",
+    "check:engines": "cd runner/cores && shasum -a 256 -c CHECKSUMS.sha256",
+    "dev": "claude --plugin-dir ."
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}

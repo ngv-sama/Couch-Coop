@@ -1,0 +1,12 @@
+# Keep line endings stable for scripts and sources.
+* text=auto eol=lf
+
+# Built and binary files: never diff or normalize them.
+*.wasm binary
+*.gb binary
+*.gbc binary
+*.png binary
+
+# Vendored third-party source: collapse it in diffs and language stats.
+engines/doom/doomgeneric/** linguist-vendored
+engines/gameboy/binjgb/** linguist-vendored

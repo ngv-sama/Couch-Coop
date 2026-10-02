@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "couch-coop",
+  "owner": {
+    "name": "Nikhil Guru Venkatesh (original_ngv)",
+    "url": "https://github.com/ngv-sama"
+  },
+  "metadata": {
+    "description": "Couch Co-op: Doom and Game Boy games in a Claude Code pane, co-op with Claude."
+  },
+  "plugins": [
+    {
+      "name": "couch-coop",
+      "source": ".",
+      "description": "An arcade inside Claude Code: play Doom (Freedoom) and Game Boy games in a pane, on your own or co-op with Claude.",
+      "category": "fun"
+    }
+  ]
+}

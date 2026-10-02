@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "couch-coop",
+  "displayName": "Couch Co-op",
+  "version": "0.1.0",
+  "description": "An arcade inside Claude Code: play Doom (Freedoom) and Game Boy games in a pane, on your own or co-op with Claude.",
+  "author": {
+    "name": "Nikhil Guru Venkatesh (original_ngv)",
+    "url": "https://github.com/ngv-sama"
+  },
+  "homepage": "https://github.com/ngv-sama/couch-coop",
+  "repository": "https://github.com/ngv-sama/couch-coop",
+  "license": "MIT AND GPL-2.0-or-later AND Zlib",
+  "keywords": [
+    "mod",
+    "game",
+    "arcade",
+    "doom",
+    "freedoom",
+    "game-boy",
+    "emulator",
+    "co-op"
+  ],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "node_path": {
+      "type": "string",
+      "title": "Node.js path",
+      "description": "Node.js 20 or newer runs the games. Leave empty to find it automatically (PATH, Homebrew, Volta, nvm).",
+      "default": ""
+    },
+    "roms_folder": {
+      "type": "string",
+      "title": "Game Boy ROMs folder",
+      "description": "Where your own .gb and .gbc files are. Leave empty for ~/.couch-coop/roms.",
+      "default": ""
+    },
+    "display": {
+      "type": "string",
+      "title": "Picture",
+      "description": "blocks: colored half-block cells, works in every terminal. pixels: real pixels in kitty and Ghostty. auto: pixels where they work.",
+      "options": [
+        "auto",
+        "blocks",
+        "pixels"
+      ],
+      "default": "auto"
+    },
+    "fps": {
+      "type": "number",
+      "title": "Frames per second",
+      "description": "How often the picture refreshes. Lower it if your terminal struggles.",
+      "default": 24,
+      "min": 5,
+      "max": 30
+    }
+  }
+}
